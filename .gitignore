@@ -1,0 +1,15 @@
+__pycache__
+.vscode
+node_modules
+
+# 画像
+post/
+test/
+train/
+
+# ビルドファイル
+bundle.js
+style.css
+
+# 学習データ
+seiza_model.hdf5
