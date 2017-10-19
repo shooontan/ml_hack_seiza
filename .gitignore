@@ -8,8 +8,8 @@ test/
 train/
 
 # ビルドファイル
-bundle.js
-style.css
+/public/javascripts/bundle.js
+/public/stylesheets/style.css
 
 # 学習データ
-seiza_model.hdf5
+# seiza_model.hdf5
