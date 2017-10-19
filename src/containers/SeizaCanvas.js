@@ -1,24 +1,36 @@
 import React, { Component } from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
+
 import getFileName from '../components/FileName';
 import MainCanvas from '../components/MainCanvas';
 import SeizaPoint from '../components/SeizaPoint';
+import JudgeMessage from '../components/JudgeMessage';
+
+// const style = {
+//     margin: 12,
+// };
 
 export default class CanvasComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            point: 0,
-            img: null,
+            img: null, // dataURLImage
+            message: '？？？？', // 結果の内容
+            loading: false, // 判別中
         }
         this.onClickJudgeBtn = this.onClickJudgeBtn.bind(this);
-        this.onClickResetBtn = this.onClickResetBtn.bind(this);
         this.setDateURLImg = this.setDateURLImg.bind(this);
-        this.countUp = this.countUp.bind(this);
-        this.countClear = this.countClear.bind(this);
+        this.setMassage = this.setMassage.bind(this);
     }
 
-    // canvs画像のダウンロード
+    // 画像の判別
     onClickJudgeBtn() {
+        console.log("aa")
+        // 判別開始
+        this.setState({
+            loading: true,
+        });
+
         const data = {
             image: this.state.img,
         };
@@ -33,27 +45,24 @@ export default class CanvasComponent extends Component {
             return response.json();
         }).then(payload => {
             console.log(payload);
+
+            // 星座名を取得
+            const name = payload.result.name || '';
+            this.setMassage(name);
+
+            // 判別終了
+            this.setState({
+                loading: false,
+            });
         }).catch(error => {
             console.log(error);
+            this.setMassage('ERROR');
+
+            // 判別終了
+            this.setState({
+                loading: false,
+            });
         })
-    }
-
-    // キャンバスリセット
-    onClickResetBtn() {
-        console.log("aaaaa")
-    }
-
-    // ポイントのカウントアップ
-    countUp() {
-        this.setState({
-            point: this.state.point + 1,
-        });
-    }
-
-    countClear() {
-        this.setState({
-            point: 0,
-        });
     }
 
     // DateURL画像のテキストをセット
@@ -63,27 +72,35 @@ export default class CanvasComponent extends Component {
         });
     }
 
+    // メッセージを表示する
+    setMassage(text) {
+        this.setState({
+            message: text,
+        });
+    }
+
     render() {
         const actions = {
-            countUp: this.countUp,
-            countClear: this.countClear,
-            setDateURLImg: this.setDateURLImg
+            setDateURLImg: this.setDateURLImg,
+            setMassage: this.setMassage,
+            onClickJudgeBtn: this.onClickJudgeBtn,
         };
 
         return (
             <div>
+                <div className="head-box">
+                    <p>SEP 9 - 10, 2017</p>
+                    <p>TEAM SEIZA, CHOFU, TK</p>
+                </div>
                 <MainCanvas
-                    point={this.state.point}
                     actions={actions}
+                    loading={this.state.loading}
                 />
-                <SeizaPoint
-                    point={this.state.point}
+                <JudgeMessage
+                    loading={this.state.loading}
+                    message={this.state.message}
                 />
-                <button
-                    onClick={this.onClickJudgeBtn}
-                >判別</button>
             </div>
-
         )
     }
 }

@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
 import getFileName from './FileName';
+
+const style = {
+    margin: 12,
+};
+
 
 export default class CanvasComponent extends Component {
     constructor(props) {
@@ -7,7 +13,7 @@ export default class CanvasComponent extends Component {
         this.state = {
             defSize: 7,
             defColor: '#fff',
-            point: 0,
+            points: [], // 点の位置
         }
         this.draw = this.draw.bind(this);
         this.onClickCanvas = this.onClickCanvas.bind(this);
@@ -24,9 +30,9 @@ export default class CanvasComponent extends Component {
     }
 
     // canvas のリセットを防ぐ
-    shouldComponentUpdate(nextProps, nextState) {
-        return false;
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     return false;
+    // }
 
     componentDidUpdate() {
         this.updateCanvas();
@@ -39,6 +45,11 @@ export default class CanvasComponent extends Component {
         ctx.fillStyle = "#333";
         ctx.fillRect(0, 0, 700, 400);
         // this.props.updateCanvas(context);
+
+        this.state.points.forEach((val, ind, ar) => {
+            //draw 関数にマウスの位置を渡す
+            this.draw(val[0], val[1]);
+        });
     }
 
     onClickCanvas(e) {
@@ -46,11 +57,8 @@ export default class CanvasComponent extends Component {
         const X = ~~(e.clientX - rect.left);
         const Y = ~~(e.clientY - rect.top);
 
-        //draw 関数にマウスの位置を渡す
-        this.draw(X, Y);
-
-        // ポイントのカウントアップ
-        this.props.actions.countUp();
+        // 点の位置を保存していく
+        this.state.points.push([X, Y]);
 
         // DataURLImg のstateを更新する
         const img = this.refs.canvas.toDataURL('image/png');
@@ -81,7 +89,11 @@ export default class CanvasComponent extends Component {
         ctx.globalAlpha = 1.0;
         ctx.fillRect(0, 0, 700, 400);
 
-        this.props.actions.countClear();
+        this.state.points = [];
+
+        // DataURLImg のstateを更新する
+        const img = this.refs.canvas.toDataURL('image/png');
+        this.props.actions.setDateURLImg(img);
     }
 
     render() {
@@ -94,16 +106,28 @@ export default class CanvasComponent extends Component {
         }
 
         return (
-            <div>
-                <canvas
-                    ref="canvas"
-                    width={width}
-                    height={height}
-                    onClick={this.onClickCanvas}
-                ></canvas>
-                <button
-                    onClick={this.onClickResetBtn}
-                >リセット</button>
+            <div className="canvas-box">
+                <div>
+                    <canvas
+                        ref="canvas"
+                        width={width}
+                        height={height}
+                        onClick={this.onClickCanvas}
+                    ></canvas>
+                </div>
+                <div className="canvas-btn-box">
+                    <RaisedButton
+                        label="HACK"
+                        style={style}
+                        onClick={this.props.actions.onClickJudgeBtn}
+                        disabled={this.props.loading}
+                    />
+                    <RaisedButton
+                        label="RESET"
+                        style={style}
+                        onClick={this.onClickResetBtn}
+                    />
+                </div>
             </div>
         )
     }

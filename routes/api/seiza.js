@@ -92,6 +92,12 @@ const readJsonData = (req, res, next) => {
         password: 'password',
         database: 'ml_hack_seiza'
     });
+    // var connection = mysql.createConnection({
+    //     host: 'localhost',
+    //     user: 'adminuser',
+    //     password: 'password',
+    //     database: 'ml_hack_seiza'
+    // });
     connection.connect();
     const sql = `SELECT * FROM seiza WHERE img_path = '${postImgPath}' LIMIT 1`;
     console.log(sql);

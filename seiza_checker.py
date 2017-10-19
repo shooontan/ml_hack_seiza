@@ -67,6 +67,13 @@ for i, p in enumerate(pre):
     # print(jsonText)
 
 # jsonを保存 --- (※5)
+# connector = MySQLdb.connect(
+#     user = 'adminuser',
+#     passwd = 'password',
+#     host = 'localhost',
+#     db = 'ml_hack_seiza',
+#     charset="utf8"
+# )
 connector = MySQLdb.connect(
     user = 'root',
     passwd = 'password',
@@ -74,6 +81,7 @@ connector = MySQLdb.connect(
     db = 'ml_hack_seiza',
     charset="utf8"
 )
+
 
 cursor = connector.cursor()
 cursor.execute('INSERT INTO seiza (`img_path`, `result`) VALUES (%s, %s)', (fname, jsonText))
