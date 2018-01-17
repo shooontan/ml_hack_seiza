@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
-// import './App.css';
+import { hot } from 'react-hot-loader';
 import SeizaCanvas from './containers/SeizaCanvas';
 
 class App extends Component {
@@ -8,7 +7,7 @@ class App extends Component {
     return (
       <div className="App">
         {/* <div className="bgi-container"> */}
-          <div className="bgi"></div>
+        <div className="bgi"></div>
         {/* </div> */}
         <SeizaCanvas />
       </div>
@@ -16,4 +15,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default hot(module)(App);

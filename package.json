@@ -3,16 +3,16 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "production": "webpack -p",
-    "develop": "webpack -d",
-    "watch": "webpack -d --watch"
+    "start": "webpack-dev-server --config webpack.config.dev.js --hot",
+    "production": "webpack -p --config webpack.config.prod.js && webpack -p --config webpack.config.css.js"
   },
   "dependencies": {
     "material-ui": "^0.20.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-tap-event-plugin": "^2.0.1"
+    "react-hot-loader": "^4.0.0-beta.15",
+    "react-tap-event-plugin": "^2.0.1",
+    "webpack-dev-server": "^2.11.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.5",
@@ -26,6 +26,7 @@
     "postcss-loader": "^2.0.10",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1",
-    "webpack": "^3.10.0"
+    "webpack": "^3.10.0",
+    "webpack-merge": "^4.1.1"
   }
 }
