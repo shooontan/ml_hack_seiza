@@ -1,7 +1,10 @@
-import React, { Component } from 'react';
+// @flow
+import * as React from 'react';
 
-const SeizaPoint = (props) => (
-    <p>points: {props.point}</p>
-)
+type PropsType = {
+  point: number,
+};
+
+const SeizaPoint = (props: PropsType) => <p>points: {props.point}</p>;
 
 export default SeizaPoint;

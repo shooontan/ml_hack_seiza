@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+// @flow
+import * as React from 'react';
 import { hot } from 'react-hot-loader';
 import SeizaCanvas from './containers/SeizaCanvas';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        {/* <div className="bgi-container"> */}
-        <div className="bgi"></div>
-        {/* </div> */}
-        <SeizaCanvas />
-      </div>
-    );
-  }
+function App() {
+  return (
+    <div className="App">
+      <div className="bgi" />
+      <SeizaCanvas />
+    </div>
+  );
 }
 
 export default hot(module)(App);

@@ -1,8 +1,12 @@
 # ml_hack_seiza
-星座機械学習のwebページ
+
+星座機械学習の web ページ
 
 ## demo
+
 [demo](https://shooontan.github.io/ml_hack_seiza/)
 
 ## 注意
-Pythonを使って判別するため、上記のページではHACKできない。
+
+Python を使って判別するため、上記のページでは HACK できない。
+Chrome ブラウザ推奨。

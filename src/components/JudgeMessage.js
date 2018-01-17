@@ -1,20 +1,26 @@
-import React, { Component } from 'react';
+// @flow
+import * as React from 'react';
 import CircularProgress from 'material-ui/CircularProgress';
 
-const JudgeMessage = (props) => {
-    if (props.loading) {
-        return (
-            <div className="judge-box">
-                <CircularProgress />
-            </div>
-        )
-    }
+type PropsType = {
+  loading: boolean,
+  message: string,
+};
 
+function JudgeMessage(props: PropsType) {
+  if (props.loading) {
     return (
-        <div className="judge-box">
-            <p>{props.message}</p>
-        </div>
-    )
+      <div className="judge-box">
+        <CircularProgress />
+      </div>
+    );
+  }
+
+  return (
+    <div className="judge-box">
+      <p>{props.message}</p>
+    </div>
+  );
 }
 
 export default JudgeMessage;
