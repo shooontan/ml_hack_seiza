@@ -19,42 +19,66 @@ export default class CanvasComponent extends React.Component<PropsType, StateTyp
   };
 
   // 画像の判別
-  onClickJudgeBtn = () => {
+  onClickJudgeBtn = async () => {
     // 判別開始
     this.setState({
       loading: true,
     });
 
-    const data = {
-      image: this.state.img,
-    };
+    console.log('====================================');
+    console.log(this.state.img);
+    console.log('====================================');
 
-    fetch('/api/seiza', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => response.json())
-      .then((payload) => {
-        // 星座名を取得
-        const name = payload.result.name || '';
-        this.setMassage(name);
+    // try {
+    //   await model.ready();
+    //   const inputData = {
+    //     input_1: new Float32Array(this.state.img),
+    //   };
+    //   const outputData = await model.predict(inputData);
+    //   console.log('====================================');
+    //   console.log(outputData);
+    //   console.log('====================================');
+    // } catch (err) {
+    //   // handle error
+    //   console.log('====================================');
+    //   console.log();
+    //   console.log('====================================');
+    // }
 
-        // 判別終了
-        this.setState({
-          loading: false,
-        });
-      })
-      .catch(() => {
-        this.setMassage('ERROR');
+    // const data = {
+    //   image: this.state.img,
+    // };
+    // fetch('/api/seiza', {
+    //   method: 'POST',
+    //   body: JSON.stringify(data),
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    // })
+    //   .then(response => response.json())
+    //   .then((payload) => {
+    //     // 星座名を取得
+    //     const name = payload.result.name || '';
+    //     this.setMassage(name);
 
-        // 判別終了
-        this.setState({
-          loading: false,
-        });
-      });
+    //     // 判別終了
+    //     this.setState({
+    //       loading: false,
+    //     });
+    //   })
+    //   .catch(() => {
+    //     this.setMassage('ERROR');
+
+    //     // 判別終了
+    //     this.setState({
+    //       loading: false,
+    //     });
+    //   });
+
+    // 判別終了
+    this.setState({
+      loading: false,
+    });
   };
 
   // DateURL画像のテキストをセット

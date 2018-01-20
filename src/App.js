@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { hot } from 'react-hot-loader';
 import SeizaCanvas from './containers/SeizaCanvas';
-import './keras';
 
 function App() {
   return (

@@ -6,6 +6,7 @@ module.exports = {
     publicPath: '/',
     filename: '[name].js',
   },
+  devtool: process.env.NODE_ENV === 'production' ? false : 'cheap-module-eval-source-map',
   module: {
     rules: [
       {
