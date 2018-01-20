@@ -10,3 +10,9 @@
 
 Python を使って判別するため、上記のページでは HACK できない。
 Chrome ブラウザ推奨。
+
+## Python
+```
+$ python -v
+Python 3.6.4
+```

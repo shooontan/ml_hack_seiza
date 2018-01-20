@@ -5,9 +5,7 @@ const webpackConfig = require('./webpack.config.common');
 
 module.exports = merge(webpackConfig, {
   entry: {
-    bundle: [
-      path.join(__dirname, '/src/index.js'),
-    ],
+    bundle: [path.join(__dirname, '/src/index.js')],
   },
   devServer: {
     hot: true,
