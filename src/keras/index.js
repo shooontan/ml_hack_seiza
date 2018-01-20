@@ -1,6 +1,10 @@
 import KerasJS from 'keras-js';
 
+const filepath = window.location.origin;
+
 const model = new KerasJS.Model({
-  filepath: './seiza_model.hdf5',
-  gpu: true,
+  filepath: `${filepath}/seiza_model.bin`,
+  filesystem: true,
 });
+
+export default model;

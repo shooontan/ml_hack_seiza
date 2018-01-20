@@ -53,11 +53,10 @@ def model_train(X, y):
     model = build_model(X.shape[1:])
     model.fit(X, y, batch_size=32, epochs=10)
     # モデルを保存する
-    hdf5_file = "./seiza_model.hdf5"
-    model.save_weights(hdf5_file)
-    # モデルをjsonで保存する
-    with open('seiza_model.json', 'w') as f:
-        f.write(model.to_json())
+    # hdf5_file = "./seiza_model.hdf5"
+    # model.save_weights(hdf5_file)
+    hdf5_file = "./seiza_model.h5"
+    model.save(hdf5_file)
     return model
 
 # モデルを評価する
