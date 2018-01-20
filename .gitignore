@@ -4,8 +4,6 @@ node_modules
 
 # 画像
 post/
-test/
-train/
 
 # ビルドファイル
 /public/javascripts/bundle.js
