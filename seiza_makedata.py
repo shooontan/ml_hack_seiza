@@ -11,7 +11,7 @@ categories = [
 nb_classes = len(categories)
 image_size = 50
 
-# 画像データを読み込む --- (※1)
+# 画像データを読み込む
 X = [] # 画像データ
 Y = [] # ラベルデータ
 
@@ -30,12 +30,6 @@ def add_sample(cat, fname, is_train):
         data = np.asarray(img2)
         X.append(data)
         Y.append(cat)
-        # img2.save("gyudon-"+str(ang)+".png")
-        # 反転する
-        # img2 = img2.transpose(Image.FLIP_LEFT_RIGHT)
-        # data = np.asarray(img2)
-        # X.append(data)
-        # Y.append(cat)
 
 def make_sample(files, is_train):
     global X, Y
@@ -44,7 +38,7 @@ def make_sample(files, is_train):
         add_sample(cat, fname, is_train)
     return np.array(X), np.array(Y)
 
-# ディレクトリごとに分けられたファイルを収集する --- (※2)
+# ディレクトリごとに分けられたファイルを収集する
 allfiles = []
 for idx, cat in enumerate(categories):
     image_dir = root_dir + "/" + cat
@@ -52,7 +46,7 @@ for idx, cat in enumerate(categories):
     for f in files:
         allfiles.append((idx, f))
 
-# シャッフルして学習データとテストデータに分ける --- (※3)
+# シャッフルして学習データとテストデータに分ける
 random.shuffle(allfiles)
 th = math.floor(len(allfiles) * 0.6)
 train = allfiles[0:th]

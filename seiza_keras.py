@@ -14,7 +14,7 @@ categories = [
 nb_classes = len(categories)
 image_size = 50
 
-# データをロード --- (※1)
+# データをロード
 def main():
     X_train, X_test, y_train, y_test = np.load("./seiza.npy")
     # データを正規化する
@@ -26,7 +26,7 @@ def main():
     model = model_train(X_train, y_train)
     model_eval(model, X_test, y_test)
 
-# モデルを構築 --- (※2)
+# モデルを構築
 def build_model(in_shape):
     # print(in_shape)
     model = Sequential()
@@ -39,7 +39,7 @@ def build_model(in_shape):
     model.add(Conv2D(64, 3, 3))
     model.add(MaxPooling2D(pool_size=(2, 2)))
     model.add(Dropout(0.25))
-    model.add(Flatten()) 
+    model.add(Flatten())
     model.add(Dense(512))
     model.add(Activation('relu'))
     model.add(Dropout(0.5))
@@ -48,16 +48,19 @@ def build_model(in_shape):
     model.compile(loss='binary_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
     return model
 
-# モデルを訓練する --- (※3)
+# モデルを訓練する
 def model_train(X, y):
     model = build_model(X.shape[1:])
-    model.fit(X, y, batch_size=32, epochs=100)
-    # モデルを保存する --- (※4)
+    model.fit(X, y, batch_size=32, epochs=10)
+    # モデルを保存する
     hdf5_file = "./seiza_model.hdf5"
     model.save_weights(hdf5_file)
+    # モデルをjsonで保存する
+    with open('seiza_model.json', 'w') as f:
+        f.write(model.to_json())
     return model
 
-# モデルを評価する --- (※5)
+# モデルを評価する
 def model_eval(model, X, y):
     score = model.evaluate(X, y)
     print('loss=', score[0])
