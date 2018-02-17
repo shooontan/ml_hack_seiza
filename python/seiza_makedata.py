@@ -4,7 +4,7 @@ import numpy as np
 import random, math
 
 # 分類対象のカテゴリを選ぶ
-root_dir = "./data/train/"
+root_dir = "../data/train/"
 categories = [
     "ohituzi", "ousi", "hutago", "kani", "sisi", "otome",
     "tenbin", "sasori", "ite", "yagi", "mizugame", "uo"]

@@ -5,7 +5,7 @@ from PIL import Image
 import numpy as np
 from bottle import route, run, template
 from bottle import get, post, request, response, error
-import seiza_keras as seiza
+from python import seiza_keras
 import base64
 import re
 from io import BytesIO
@@ -22,7 +22,6 @@ def hello():
 @post("/api/predict")
 def predict():
     try:
-        print(request.params.get('data'))
         image_data = re.sub('^data:image/.+;base64,', '', request.params.get('data'))
         img = Image.open(BytesIO(base64.b64decode(image_data)))
 
@@ -34,8 +33,8 @@ def predict():
 
         X = np.array(X)
 
-        model = seiza.build_model(X.shape[1:])
-        model.load_weights("./seiza_model.hdf5")
+        model = seiza_keras.build_model(X.shape[1:])
+        model.load_weights("./python/seiza_model.hdf5")
         pre = model.predict(X)
 
         body = {

@@ -27,14 +27,9 @@ for fname in sys.argv[1:]:
     in_data = np.asarray(img)
     X.append(in_data)
     files.append(fname)
-    print(fname)
     break
 
 X = np.array(X)
-
-print(X)
-print(X.shape)
-print(X.shape[1:])
 
 # CNNのモデルを構築 --- (※3)
 model = seiza.build_model(X.shape[1:])
@@ -44,27 +39,7 @@ model.load_weights("./seiza_model.hdf5")
 html = ""
 pre = model.predict(X)
 
-print(pre)
-
 for i, p in enumerate(pre):
     y = p.argmax()
     print("+ 入力:", files[i])
     print("| 星座名:", categories[y])
-
-
-
-def checker(image):
-    X = []
-    img = Image.open(image)
-    img = img.convert("RGB")
-    img = img.resize((image_size, image_size))
-    in_data = np.asarray(img)
-    X.append(in_data)
-
-    X = np.array(X)
-
-    model = seiza.build_model(X.shape[1:])
-    model.load_weights("./seiza_model.hdf5")
-
-    pre = model.predict(X)
-    return pre

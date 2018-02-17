@@ -7,7 +7,7 @@ from keras.optimizers import Adam
 import numpy as np
 
 # 分類対象のカテゴリ
-root_dir = "./data/train/"
+root_dir = "../data/train/"
 categories = [
     "ohituzi", "ousi", "hutago", "kani", "sisi", "otome",
     "tenbin", "sasori", "ite", "yagi", "mizugame", "uo"]
