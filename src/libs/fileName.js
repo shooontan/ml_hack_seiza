@@ -8,7 +8,7 @@ function DateFormat(num) {
   return num;
 }
 
-function FileName() {
+export default function FileName() {
   // ファイル名のプレフィクス
   const prefix = 'seiza';
 
@@ -24,5 +24,3 @@ function FileName() {
   // pre_yyyymmdd_hhmmss
   return `${prefix}_${year}${month}${day}_${hour}${min}${sec}`;
 }
-
-export default FileName;
