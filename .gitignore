@@ -11,3 +11,7 @@ post/
 
 # 学習データ
 # seiza_model.hdf5
+
+# bundle
+/public/bundle.js
+/public/style.css

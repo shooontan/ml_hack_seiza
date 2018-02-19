@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --config webpack.config.dev.js --hot",
-    "production": "webpack -p --config webpack.config.prod.js && webpack -p --config webpack.config.css.js",
+    "build": "NODE_ENV=production webpack -p --config webpack.config.prod.js && webpack -p --config webpack.config.css.js",
     "lint": "prettier-eslint --write \"src/**/*.js\""
   },
   "dependencies": {
